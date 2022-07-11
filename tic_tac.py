@@ -1,5 +1,9 @@
 
+from pickle import TRUE
 import time
+
+from soupsieve import match
+from sympy import re
 import jogador
 
 
@@ -125,7 +129,9 @@ def jogar(jogo,x_jogador,o_jogador,imprimir_jogo=True):
                 letra='O'
             else:
                 letra='X'
-            time.sleep(1)
+            
+            if imprimir_jogo:
+                time.sleep(1)
 
             #letra = 'O' if letra == 'X' else 'X' #mesma coisa que o código acima
     if imprimir_jogo:
@@ -134,9 +140,48 @@ def jogar(jogo,x_jogador,o_jogador,imprimir_jogo=True):
 
 
 if __name__=='__main__':
-    while True:
-        print("Iniciando um novo jogo...")
-        x_jogador=jogador.JogadorHumano('X')
-        o_jogador=jogador.JogadorComputador('O')
-        t=JogoDaVelha()
-        jogar(t,x_jogador,o_jogador,imprimir_jogo=True)
+    rodadas = 25
+    x=0
+    o=0
+    empate=0
+    opcao='c'
+    print("Bem vindo ao jogo da velha! ")
+    while (opcao!='sair'):
+        
+        print("1- Player vs Player")
+        print("2- Player vs IA impossível")
+        print("3- Aleatório vs IA impossível")
+        print("Entre sua opção ou 'sair':")
+        opcao = input()
+
+        if (opcao == '1'):
+            x_jogador=jogador.JogadorHumano('X')
+            o_jogador=jogador.JogadorHumano('O')
+            t=JogoDaVelha()
+            jogar(t,x_jogador,o_jogador,imprimir_jogo=True)
+        elif (opcao=='2'):
+            x_jogador=jogador.JogadorHumano('X')
+            o_jogador=jogador.JogadorComputadorIA('O')
+            t=JogoDaVelha()
+            jogar(t,x_jogador,o_jogador,imprimir_jogo=True)
+        elif (opcao=='3'):
+            vezes = int(input ("Insira a quantidade de jogos a simular:"))
+            for i in range ( vezes):
+                x_jogador=jogador.JogadorComputador('X')
+                o_jogador=jogador.JogadorComputadorIA('O')
+                t = JogoDaVelha()
+                resultado = jogar(t,x_jogador,o_jogador,False)
+                if resultado =='X':
+                    x+=1
+                elif resultado =='O':
+                    o+=1
+                else :
+                    empate +=1
+                print(f"Jogo {i+1} resultado {resultado if resultado !=None else 'Empate'}: ")
+    
+            print(f"X ganhou {x} vezes, O ganhou {o} vezes e o jogo empatou {empate} vezes.")
+
+
+        elif (opcao!='sair'):
+            print("Opcao inválida !")
+       
