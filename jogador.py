@@ -1,9 +1,7 @@
 import math
 import random 
 import math
-from xml.dom import minicompat
 
-from sympy import posify
 from tic_tac import JogoDaVelha
 
 

@@ -1,9 +1,4 @@
-
-from pickle import TRUE
 import time
-
-from soupsieve import match
-from sympy import re
 import jogador
 
 
@@ -158,7 +153,7 @@ if __name__=='__main__':
             x_jogador=jogador.JogadorHumano('X')
             o_jogador=jogador.JogadorHumano('O')
             t=JogoDaVelha()
-            jogar(t,x_jogador,o_jogador,imprimir_jogo=True)
+            jogar(t,x_jogador,o_jogador,imprimir_jogo=False)
         elif (opcao=='2'):
             x_jogador=jogador.JogadorHumano('X')
             o_jogador=jogador.JogadorComputadorIA('O')
